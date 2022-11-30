@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.sql.*;
 
 import context.DBContext;
+import model.Bean.Admin;
 import model.Bean.ProductModel;
 
 public class ProductDAO {
@@ -107,7 +108,23 @@ public class ProductDAO {
 			return null;
 		}
 	}
-	public static void main(String[] args) {
-		System.out.println("Lay ra ");
+	public static Admin getAdminByLogin(String username, String password) {
+		Connection conn = DBContext.getConnect();
+		
+		String sql = "select * from admin where username = ? and password = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				Admin admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3));
+				return admin;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

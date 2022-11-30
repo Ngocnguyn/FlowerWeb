@@ -1,7 +1,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.BO.ProductBO"%>
 <%@page import="model.Bean.ProductModel"%>
-<%@page import="model.Bean.Admin"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,14 +36,8 @@
     <div class="icons">
         <a href="#" class="fas fa-heart"></a>
         <a href="#" class="fas fa-shopping-cart"></a>
-        <%Admin admin = (Admin) session.getAttribute("admin"); 
-        	if(admin == null){
-        %>
         <a href="Login.jsp" class="fas fa-user"></a>
-        <%}else { %>
-        	<h5><%admin.getUsername(); %></h5>
-        <%} %>
-    </div> 
+    </div>
 
 </header>
 
@@ -136,9 +129,9 @@
 <section class="products" id="products">
 
     <h1 class="heading"> latest <span>products</span>  </h1>
-	<!-- <a class ="btn" href="product-add.jsp">
+	<a class ="btn" href="product-add.jsp">
 	    + New Item
-    </a> -->
+    </a>
     <div class="box-container" style="margin-top:2rem;">
     <% ArrayList<ProductModel> products = (ArrayList<ProductModel>)request.getAttribute("products");%>
 		<%for(ProductModel item : products){
@@ -147,11 +140,11 @@
             <span class="discount">-<%=item.getDiscount()%>%</span>
             <div class="image">
                 <img src="<%=item.getImg()%>" alt="">
-                <%-- <div class="icons">
+                <div class="icons">
                     <a href="#" class="fas fa-heart"></a>
                     <a href="product-edit.jsp?id=<%=item.getId()%>" class="cart-btn">Edit</a>
                     <a href="ProductDelete?id=<%=item.getId()%>" class="fas fa-trash"></a>
-                </div> --%>
+                </div>
             </div>
             <div class="content">
                 <h3><%=item.getName()%></h3>
@@ -305,5 +298,6 @@
 
 </section>
 
+<!-- footer section ends -->    
 </body>
 </html>
