@@ -34,7 +34,7 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<ProductModel> products = productBO.getProducts();
 		request.setAttribute("products", products);
-		request.getRequestDispatcher("/Home.jsp").forward(request, response);
+		request.getRequestDispatcher("/View/Home.jsp").forward(request, response);
 	}
 
 	/**

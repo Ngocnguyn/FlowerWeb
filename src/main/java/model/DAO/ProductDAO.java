@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.Base64;
 import java.sql.*;
 
 import context.DBContext;
@@ -26,7 +26,7 @@ public class ProductDAO {
 			while(rs.next()) {
 				ProductModel product = new ProductModel();
 				product.setId(rs.getInt("ID"));
-				product.setImg(rs.getString("Img"));
+				product.setImg(rs.getBytes("Img"));
 				product.setName(rs.getString("Name"));
 				product.setPrice(rs.getInt("Price"));
 				product.setDiscount(rs.getInt("Discount"));
@@ -45,11 +45,13 @@ public class ProductDAO {
 		
 		Connection conn = DBContext.getConnect(); // Vao cong ket noi
 		try {
-			String sql = "INSERT INTO product(Img, Name, Price, Discount) "
-					+ "VALUES ('"+product.getImg()+"','"+product.getName()+"','"+product.getPrice()+"','"+product.getDiscount()+"')";
-			Statement stmt = conn.createStatement();
-			System.out.print(sql);
-			boolean success = stmt.executeUpdate(sql) >0;
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO product(Img, Name, Price, Discount) values(?,?,?,?)");
+			ps.setBytes(1, product.getImg());
+			ps.setString(2, product.getName());
+			ps.setInt(3, product.getPrice());
+			ps.setInt(4, product.getDiscount());
+			System.out.println(product.getImg());
+			boolean success = ps.executeUpdate() >0;
 			return success;
  		} catch (Exception e) {
 			// TODO: handle exception
@@ -62,11 +64,13 @@ public class ProductDAO {
 	public static boolean editProduct(ProductModel product) {
 		Connection conn = DBContext.getConnect(); // Vao cong ket noi
 		try {
-			String sql = "update product set Img= '"+product.getImg()+"',Name='"+product.getName()+"'"
-					+ ",Price='"+product.getPrice()+"',Discount='"+product.getDiscount()+"' where ID="+product.getId();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.executeUpdate();
-			return true;
+			PreparedStatement ps = conn.prepareStatement("update product(Img, Name, Price, Discount) values(?,?,?,?)");
+			ps.setBytes(1, product.getImg());
+			ps.setString(2, product.getName());
+			ps.setInt(3, product.getPrice());
+			ps.setInt(4, product.getDiscount());
+			boolean success = ps.executeUpdate() >0;
+			return success;
  		} catch (Exception e) {
 			// TODO: handle exception
  			e.printStackTrace();
@@ -95,7 +99,7 @@ public class ProductDAO {
 			while(rs.next()) {
 				product = new ProductModel(); 
 				product.setId(rs.getInt("ID"));
-				product.setImg(rs.getString("Img"));
+				product.setImg(rs.getBytes("Img"));
 				product.setName(rs.getString("Name"));
 				product.setPrice(rs.getInt("Price"));
 				product.setDiscount(rs.getInt("Discount"));

@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@page import="model.BO.ProductBO"%>
 <%@page import="model.Bean.ProductModel"%>
 <%@page import="model.Bean.Admin"%>
@@ -37,7 +37,7 @@
     <div class="icons">
         <a href="#" class="fas fa-heart"></a>
         <a href="#" class="fas fa-shopping-cart"></a>
-        <a href="Login.jsp" class="fas fa-user"></a>
+        <a href="View/Login.jsp" class="fas fa-user"></a>
     </div> 
 
 </header>
@@ -130,9 +130,6 @@
 <section class="products" id="products">
 
     <h1 class="heading"> latest <span>products</span>  </h1>
-	<!-- <a class ="btn" href="product-add.jsp">
-	    + New Item
-    </a> -->
     <div class="box-container" style="margin-top:2rem;">
     <% ArrayList<ProductModel> products = (ArrayList<ProductModel>)request.getAttribute("products");%>
 		<%for(ProductModel item : products){
@@ -140,13 +137,11 @@
 			<div class="box">
             <span class="discount">-<%=item.getDiscount()%>%</span>
             <div class="image">
-                <img src="<%=item.getImg()%>" alt="">
-                <%-- <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="product-edit.jsp?id=<%=item.getId()%>" class="cart-btn">Edit</a>
-                    <a href="ProductDelete?id=<%=item.getId()%>" class="fas fa-trash"></a>
-                </div> --%>
-            </div>
+					<img
+						src=<%="data:image/png;base64," + new String(Base64.getEncoder().encode(item.getImg()))%>
+						alt=""
+						onerror="this.src='https://img.freepik.com/premium-vector/sunflower-character-with-crying-tears-emotion-sad-face-depressive-eyes-arms-legs-plant-person-with-melancholy-expression-yellow-sun-flower-emoticon-vector-flat-illustration_427567-4060.jpg?w=2000'">
+				</div> 
             <div class="content">
                 <h3><%=item.getName()%></h3>
                 <div class="price"> $<%= item.getPrice()*(100-item.getDiscount())/100%> <span>$<%=item.getPrice()%></span> </div>

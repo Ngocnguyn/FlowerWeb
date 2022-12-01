@@ -1,6 +1,5 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Bean.ProductModel"%>
-<%@page import="model.BO.ProductBO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,44 +10,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flower</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="css/styleForm.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/styleForm.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-
-
 <body>
-<% String admin = (String)request.getParameter("username");%>
 
 <!-- header section starts  -->
-<header>
 
+<header>
     <input type="checkbox" name="" id="toggler">
     <label for="toggler" class="fas fa-bars"></label>
 
-    <a href="HomeAdmin" class="logo">flower<span>.</span></a>
+    <a href="../Home" class="logo">flower<span>.</span></a>
 
-    <div class="icons" style="display: flex; align-items: center;">
-        <h2><%=admin%></h2>
-        <a href="logoutController" class="fas fa-sign-out-alt"></a>
+    <div class="icons">
+        <a href="#" class="fas fa-heart"></a>
+        <a href="#" class="fas fa-shopping-cart"></a>
+        <a href="Login.jsp" class="fas fa-user"></a>
     </div>
-
 </header>
 
 
 <section class="home" id="home">
-	<div class="content">
-	<!-- Lay id -->
-		<%
-			ProductModel product =  ProductBO.getProductbyID(Integer.parseInt(request.getParameter("id")));
-		%>
-		<form action="ProductEdit" method="post" class="edit-form">
-			<h1><span>Edit flower form</span></h1>
- 			<input type="text" name="product-id" placeholder="Id" value="<%=product.getId()%>" class="edit-box" readonly >
- 			<input type="text" name="product-img" placeholder="Img" value="<%=product.getImg()%>" class="edit-box">
-			<input type="text" name="product-name" placeholder="Name" value="<%=product.getName()%>" class="edit-box">
-			<input type="text" name="product-price" placeholder="Price" value="<%=product.getPrice()%>" class="edit-box">
-			<input type="text" name="product-discount" placeholder="Discount" value="<%=product.getDiscount()%>" class="edit-box">
-			<button type="submit" class="edit-btn" class="edit-box">Save</button>
+    <div class="content">
+		<form action="../loginController" method="post" class="login-form">
+			<h1><span>Login form</span></h1>
+			<input type="text" title="username" placeholder="username" name="username" class="login-box" /> 
+			<input type="password" title="username" placeholder="password" name="password" class="login-box" />
+			<button type="submit" class="login-btn">Login</button>
 		</form>
 	</div>
 </section>

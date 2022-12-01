@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -35,8 +36,8 @@ public class loginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		
+		doGet(request, response);
+		request.getRequestDispatcher("..../View/HomeAdmin.jsp");
 	}
 
 	/**
@@ -49,17 +50,15 @@ public class loginController extends HttpServlet {
 		
 		Admin admin = ProductBO.getAdminByLogin(username, password);
 		
-		
 		if(admin != null) {
 			session.setAttribute("admin", admin);
 			ArrayList<ProductModel> products = ProductBO.getProducts();
 			request.setAttribute("products",products);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeAdmin.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("View/HomeAdmin.jsp");
 			dispatcher.forward(request, response);
 		}
 		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
-			dispatcher.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/View/Login.jsp") ;
 		}
 	}
 

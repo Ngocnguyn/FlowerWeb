@@ -1,14 +1,21 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Base64;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import model.BO.ProductBO;
 import model.Bean.ProductModel;
@@ -16,6 +23,7 @@ import model.Bean.ProductModel;
 /**
  * Servlet implementation class ProductAdd
  */
+@MultipartConfig
 @WebServlet("/ProductAdd")
 public class ProductAdd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,11 +51,14 @@ public class ProductAdd extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("utf-8");
+//		response.setContentType("text/html;charset=UTF-8");
+//		request.setCharacterEncoding("utf-8");
 		
+		Part filePart=request.getPart("product-img");// Retrieves <input type="file" name="image">`
+		InputStream inputStream = filePart.getInputStream();
 		// add vao csdl
-		String img = request.getParameter("product-img");
+		byte[] img =  new byte[inputStream.available()];
+		inputStream.read(img);
 		String name = request.getParameter("product-name");
 		int price = Integer.parseInt(request.getParameter("product-price"));
 		int discount = Integer.parseInt(request.getParameter("product-discount"));
@@ -56,9 +67,7 @@ public class ProductAdd extends HttpServlet {
 		product.setName(name);
 		product.setPrice(price);
 		product.setDiscount(discount);
-		PrintWriter pr = response.getWriter();
-		pr.print(product.getImg()+product.getName()+product.getPrice()+product.getDiscount());
-		if(ProductBO.addProduct(product))
+	if(ProductBO.addProduct(product))
 		{
 			RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");
 			rd.forward(request, response);
@@ -68,5 +77,4 @@ public class ProductAdd extends HttpServlet {
 			pr2.print("Loi them vao");
 		}
 	}
-
 }

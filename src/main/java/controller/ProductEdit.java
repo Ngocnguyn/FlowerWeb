@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import model.BO.ProductBO;
 import model.Bean.ProductModel;
@@ -45,8 +47,12 @@ public class ProductEdit extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
 		
+		Part filePart=request.getPart("product-img");
+		InputStream inputStream = filePart.getInputStream();
+		
 		int id = Integer.parseInt(request.getParameter("product-id"));
-		String img = request.getParameter("product-img");
+		byte[] img =  new byte[inputStream.available()];
+		inputStream.read(img);
 		String name = request.getParameter("product-name");
 		int price = Integer.parseInt(request.getParameter("product-price"));
 		int discount = Integer.parseInt(request.getParameter("product-discount"));
@@ -56,8 +62,6 @@ public class ProductEdit extends HttpServlet {
 		product.setName(name);
 		product.setPrice(price);
 		product.setDiscount(discount);
-		PrintWriter pr = response.getWriter();
-		pr.print(product.getId()+product.getImg()+product.getName()+product.getPrice()+product.getDiscount());
 		if(ProductBO.editProduct(product))
 		{	
 			RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");

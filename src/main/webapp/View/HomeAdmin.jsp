@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@page import="model.Bean.ProductModel"%>
 <%@page import="model.Bean.Admin"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -21,11 +21,11 @@
     <input type="checkbox" name="" id="toggler">
     <label for="toggler" class="fas fa-bars"></label>
 
-    <a href="#" class="logo">flower<span>.</span></a>
+    <a href="HomeAdmin" class="logo">flower<span>.</span></a>
 
     <div class="icons" style="display: flex; align-items: center;">
-    	<h2><%=admin.getUsername()%></h2>
-        <a href="logoutController" class="fas fa-sign-out-alt"></a>
+     	<h2><%=admin.getUsername()%></h2>
+      <a href="logoutController" class="fas fa-sign-out-alt"></a>
     </div>
 
 </header>
@@ -44,7 +44,7 @@
 <section class="products" id="products">
 
     <h1 class="heading"> latest <span>products</span>  </h1>
-	<a class ="btn" href="product-add.jsp?username=<%=admin.getUsername()%>">
+	<a class ="btn" href="View/product-add.jsp?username=<%=admin.getUsername()%>">
 	    + New Item
     </a>
     <div class="box-container" style="margin-top:2rem;">
@@ -54,10 +54,12 @@
 			<div class="box">
             <span class="discount">-<%=item.getDiscount()%>%</span>
             <div class="image">
-                <img src="<%=item.getImg()%>" alt="">
-                <div class="icons">
+                 <img src=<%="data:image/png;base64," + new String(Base64.getEncoder().encode(item.getImg()))%> alt=""
+						onerror="this.src='https://img.freepik.com/premium-vector/sunflower-character-with-crying-tears-emotion-sad-face-depressive-eyes-arms-legs-plant-person-with-melancholy-expression-yellow-sun-flower-emoticon-vector-flat-illustration_427567-4060.jpg?w=2000'">
+             
+                 <div class="icons">
                     <a href="#" class="fas fa-heart"></a>
-                    <a href="product-edit.jsp?id=<%=item.getId()%>&&username=<%=admin.getUsername() %>" class="cart-btn">Edit</a>
+                    <a href="View/product-edit.jsp?id=<%=item.getId()%>&&username=<%=admin.getUsername() %>" class="cart-btn">Edit</a>
                     <a href="ProductDelete?id=<%=item.getId()%>" class="fas fa-trash"></a>
                 </div>
             </div>

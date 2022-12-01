@@ -3,15 +3,14 @@ package model.Bean;
 public class ProductModel {
 	// cac thuoc tinh tuong duong trong csdl
 	private int ID;
-	private String Img;
+	private byte[] Img;
 	private String Name;
 	private int Price;
 	private int Discount;
 	public ProductModel() {
 		super();
 	}
-	public ProductModel(int id,String img, String name, int price, int discount) {
-		super();
+	public ProductModel(int id,byte[] img, String name, int price, int discount) {
 		ID = id;
 		Img = img;
 		Name = name;
@@ -24,10 +23,10 @@ public class ProductModel {
 	public void setId(int id) {
 		this.ID = id;
 	}
-	public String getImg() {
+	public byte[] getImg() {
 		return Img;
 	}
-	public void setImg(String img) {
+	public void setImg(byte[] img) {
 		Img = img;
 	}
 	public String getName() {

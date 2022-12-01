@@ -36,7 +36,7 @@ public class HomeAdmin extends HttpServlet {
 		// TODO Auto-generated method stub
 		ArrayList<ProductModel> products = productBO.getProducts();
 		request.setAttribute("products", products);
-		request.getRequestDispatcher("/HomeAdmin.jsp").forward(request, response);	
+		request.getRequestDispatcher("/View/HomeAdmin.jsp").forward(request, response);	
 	}
 
 	/**
