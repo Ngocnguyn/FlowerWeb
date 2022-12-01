@@ -1,55 +1,77 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Bean.ProductModel"%>
 <%@page import="model.Bean.Admin"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flower</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="css/styleForm.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
-
 <body>
-<% String admin = (String)request.getParameter("username");%>
 
+<% Admin admin = (Admin) session.getAttribute("admin");%>
 <!-- header section starts  -->
 <header>
 
     <input type="checkbox" name="" id="toggler">
     <label for="toggler" class="fas fa-bars"></label>
 
-    <a href="HomeAdmin" class="logo">flower<span>.</span></a>
+    <a href="#" class="logo">flower<span>.</span></a>
 
     <div class="icons" style="display: flex; align-items: center;">
-        <h2><%=admin%></h2>
+    	<h2><%=admin.getUsername()%></h2>
         <a href="logoutController" class="fas fa-sign-out-alt"></a>
     </div>
 
 </header>
 
-
 <section class="home" id="home">
-	<div class="content">
-		<form action="ProductAdd" method="post" class="add-form">
-			<h1><span>Add flower form</span></h1>
- 			<input type="text" name="product-img" placeholder="Img" class="add-box">
-			<input type="text" name="product-name" placeholder="Name" class="add-box">
-			<input type="text" name="product-price" placeholder="Price" class="add-box">
-			<input type="text" name="product-discount" placeholder="Discount" class="add-box">
-			<button type="submit" class="add-btn" class="add-box">Add</button>
-		</form>
-	</div>
+
+    <div class="content">
+        <h3>Welcome, <%=admin.getUsername()%></h3>
+        <span> natural & beautiful flowers </span>
+    </div>
+    
 </section>
 
-<!-- home section ends -->
+<!-- products section starts  -->
+
+<section class="products" id="products">
+
+    <h1 class="heading"> latest <span>products</span>  </h1>
+	<a class ="btn" href="product-add.jsp?username=<%=admin.getUsername()%>">
+	    + New Item
+    </a>
+    <div class="box-container" style="margin-top:2rem;">
+    <% ArrayList<ProductModel> products = (ArrayList<ProductModel>)request.getAttribute("products");%>
+		<%for(ProductModel item : products){
+			%>
+			<div class="box">
+            <span class="discount">-<%=item.getDiscount()%>%</span>
+            <div class="image">
+                <img src="<%=item.getImg()%>" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="product-edit.jsp?id=<%=item.getId()%>&&username=<%=admin.getUsername() %>" class="cart-btn">Edit</a>
+                    <a href="ProductDelete?id=<%=item.getId()%>" class="fas fa-trash"></a>
+                </div>
+            </div>
+            <div class="content">
+                <h3><%=item.getName()%></h3>
+                <div class="price"> $<%= item.getPrice()*(100-item.getDiscount())/100%> <span>$<%=item.getPrice()%></span> </div>
+            </div>
+        </div>
+		<%}%>
+    </div>
+
+</section>
+
+<!-- prodcuts section ends -->
 
 <section class="footer">
 

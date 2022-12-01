@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,21 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.BO.ProductBO;
+import model.Bean.Admin;
 import model.Bean.ProductModel;
 
 /**
- * Servlet implementation class ProductDelete
+ * Servlet implementation class loginController
  */
-@WebServlet("/ProductDelete")
-public class ProductDelete extends HttpServlet {
+@WebServlet("/loginController")
+public class loginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductDelete() {
+    public loginController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,24 +34,8 @@ public class ProductDelete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Sever at: ").append(request.getContextPath());
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("utf-8");
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		int id = Integer.parseInt(request.getParameter("id"));
-		
-		ProductModel product = new ProductModel();
-		product.setId(id);
-		
-		if(ProductBO.deleteProduct(product))
-		{
-			RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");
-			rd.forward(request, response);
-		}
-		else {
-			PrintWriter pr2 = response.getWriter();
-			pr2.print("Bi loi");
-		}
 		
 	}
 
@@ -58,9 +43,24 @@ public class ProductDelete extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		HttpSession session = request.getSession();
 		
+		Admin admin = ProductBO.getAdminByLogin(username, password);
+		
+		
+		if(admin != null) {
+			session.setAttribute("admin", admin);
+			ArrayList<ProductModel> products = ProductBO.getProducts();
+			request.setAttribute("products",products);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeAdmin.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

@@ -381,7 +381,7 @@ header .fa-bars{
     align-items: center;
 }
 
-.contact .row form{
+.contact .row form, .login-form, .edit-form, .add-form{
     flex:1 1 40rem;
     padding:2rem 2.5rem;
     box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
@@ -398,7 +398,7 @@ header .fa-bars{
     width: 100%;
 }
 
-.contact .row form .box{
+.contact .row form .box {
     padding:1rem;
     font-size: 1.7rem;
     color:#333;
@@ -464,19 +464,6 @@ header .fa-bars{
 .footer .credit span{
     color:var(--pink);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* media queries  */

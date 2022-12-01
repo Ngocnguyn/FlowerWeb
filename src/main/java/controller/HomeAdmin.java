@@ -1,4 +1,4 @@
- package controller;
+package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,28 +13,30 @@ import model.BO.ProductBO;
 import model.Bean.ProductModel;
 
 /**
- * Servlet implementation class Home
+ * Servlet implementation class HomeAdmin
  */
-@WebServlet("/Home")
-public class Home extends HttpServlet {
+@WebServlet("/HomeAdmin")
+public class HomeAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ProductBO productBO;
+
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public HomeAdmin() {
         super();
         // TODO Auto-generated constructor stub
-        productBO = new ProductBO();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		ArrayList<ProductModel> products = productBO.getProducts();
 		request.setAttribute("products", products);
-		request.getRequestDispatcher("/Home.jsp").forward(request, response);
+		request.getRequestDispatcher("/HomeAdmin.jsp").forward(request, response);	
 	}
 
 	/**
@@ -42,7 +44,7 @@ public class Home extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
 	}
 
 }
