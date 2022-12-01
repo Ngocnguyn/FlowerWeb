@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import model.BO.ProductBO;
 import model.Bean.Admin;
+import model.Bean.ProductModel;
 
 /**
  * Servlet implementation class loginController
@@ -19,7 +21,6 @@ import model.Bean.Admin;
 @WebServlet("/loginController")
 public class loginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,7 +34,9 @@ public class loginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
 	}
 
 	/**
@@ -46,9 +49,12 @@ public class loginController extends HttpServlet {
 		
 		Admin admin = ProductBO.getAdminByLogin(username, password);
 		
+		
 		if(admin != null) {
 			session.setAttribute("admin", admin);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Home");
+			ArrayList<ProductModel> products = ProductBO.getProducts();
+			request.setAttribute("products",products);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/HomeAdmin.jsp");
 			dispatcher.forward(request, response);
 		}
 		else {

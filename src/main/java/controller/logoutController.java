@@ -1,40 +1,38 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import model.BO.ProductBO;
-import model.Bean.ProductModel;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Home
+ * Servlet implementation class logoutController
  */
-@WebServlet("/Home")
-public class Home extends HttpServlet {
+@WebServlet("/logoutController")
+public class logoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private ProductBO productBO;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public logoutController() {
         super();
         // TODO Auto-generated constructor stub
-        productBO = new ProductBO();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<ProductModel> products = productBO.getProducts();
-		request.setAttribute("products", products);
-		request.getRequestDispatcher("/Home.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		session.removeAttribute("admin");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/Home");
+		dispatcher.forward(request, response);
 	}
 
 	/**

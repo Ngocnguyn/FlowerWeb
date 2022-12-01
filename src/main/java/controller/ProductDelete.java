@@ -44,12 +44,12 @@ public class ProductDelete extends HttpServlet {
 		
 		if(ProductBO.deleteProduct(product))
 		{
-			RequestDispatcher rd = request.getRequestDispatcher("/home");
+			RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");
 			rd.forward(request, response);
 		}
 		else {
 			PrintWriter pr2 = response.getWriter();
-			pr2.print("Deo xoa duoc");
+			pr2.print("Bi loi");
 		}
 		
 	}

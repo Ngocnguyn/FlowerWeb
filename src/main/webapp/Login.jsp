@@ -1,5 +1,4 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.BO.ProductBO"%>
 <%@page import="model.Bean.ProductModel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flower</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="css/styleLoginModal.css">
+    <link rel="stylesheet" href="css/styleForm.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -23,7 +22,7 @@
     <input type="checkbox" name="" id="toggler">
     <label for="toggler" class="fas fa-bars"></label>
 
-    <a href="#" class="logo">flower<span>.</span></a>
+    <a href="Home" class="logo">flower<span>.</span></a>
 
     <div class="icons">
         <a href="#" class="fas fa-heart"></a>

@@ -37,13 +37,7 @@
     <div class="icons">
         <a href="#" class="fas fa-heart"></a>
         <a href="#" class="fas fa-shopping-cart"></a>
-        <%Admin admin = (Admin) session.getAttribute("admin"); 
-        	if(admin == null){
-        %>
         <a href="Login.jsp" class="fas fa-user"></a>
-        <%}else { %>
-        	<h5><%admin.getUsername(); %></h5>
-        <%} %>
     </div> 
 
 </header>
@@ -131,7 +125,7 @@
 
 <!-- icons section ends -->
 
-<!-- prodcuts section starts  -->
+<!-- products section starts  -->
 
 <section class="products" id="products">
 

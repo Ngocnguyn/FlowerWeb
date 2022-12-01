@@ -60,12 +60,12 @@ public class ProductAdd extends HttpServlet {
 		pr.print(product.getImg()+product.getName()+product.getPrice()+product.getDiscount());
 		if(ProductBO.addProduct(product))
 		{
-			RequestDispatcher rd = request.getRequestDispatcher("/home");
+			RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");
 			rd.forward(request, response);
 		}
 		else {
 			PrintWriter pr2 = response.getWriter();
-			pr2.print("Deo them vao duoc");
+			pr2.print("Loi them vao");
 		}
 	}
 
