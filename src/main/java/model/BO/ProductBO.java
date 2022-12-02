@@ -15,7 +15,6 @@ public class ProductBO {
 		return ProductDAO.getProductsbyName(name);
 	}
 	public static boolean addProduct(ProductModel product) {
-		
 		// TODO Auto-generated method stub
 		return ProductDAO.addProduct(product);
 	}

@@ -42,8 +42,8 @@
 			<h1><span>Add flower form</span></h1>
  			<input type="file" name="product-img"  placeholder="Img" class="add-box">
 			<input type="text" name="product-name" placeholder="Name" class="add-box" required>
-			<input type="text" name="product-price" placeholder="Price" class="add-box" required>
-			<input type="text" name="product-discount" placeholder="Discount" class="add-box"required>
+			<input type="number" name="product-price" placeholder="Price" class="add-box" min="0" max ="999999" required>
+			<input type="number" name="product-discount" placeholder="Discount" min="0" max="100" class="add-box"required>
 			<button type="submit" class="add-btn add-box">Add</button>
 		</form>
 	</div>

@@ -45,8 +45,8 @@
  			<input type="text" name="product-id" placeholder="Id" value="<%=product.getId()%>" class="edit-box" readonly >
  			<input type="file" name="product-img" placeholder="Img" class="edit-box">
 			<input type="text" name="product-name" placeholder="Name" value="<%=product.getName()%>" class="edit-box" required>
-			<input type="text" name="product-price" placeholder="Price" value="<%=product.getPrice()%>" class="edit-box" required>
-			<input type="text" name="product-discount" placeholder="Discount" value="<%=product.getDiscount()%>" class="edit-box" required>
+			<input type="number" name="product-price" placeholder="Price" value="<%=product.getPrice()%>" class="edit-box"min="0" max ="999999" required>
+			<input type="number" name="product-discount" placeholder="Discount" value="<%=product.getDiscount()%>" class="edit-box"min="0" max ="100" required>
 			<button type="submit" class="edit-btn" class="edit-box" onclick="saveHandle()">Save</button>
 			
 		</form>
