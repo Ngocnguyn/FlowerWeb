@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.BO.ProductBO;
+import model.BO.UserBO;
 import model.Bean.Admin;
 import model.Bean.ProductModel;
 
@@ -48,7 +49,7 @@ public class loginController extends HttpServlet {
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
 		
-		Admin admin = ProductBO.getAdminByLogin(username, password);
+		Admin admin = UserBO.getAdminByLogin(username, password);
 		
 		if(admin != null) {
 			session.setAttribute("admin", admin);

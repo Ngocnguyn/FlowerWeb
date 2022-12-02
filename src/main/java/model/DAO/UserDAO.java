@@ -1,32 +1,47 @@
 package model.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import context.DBContext;
+import model.Bean.Admin;
 import model.Bean.ProductModel;
-import model.Bean.UserModel;
 public class UserDAO {
-	public UserModel findbyUsername(String username) {
+	public static Admin getAdminByLogin(String username, String password) {
 		Connection conn = DBContext.getConnect();
-		UserModel user = new UserModel();
+		
+		String sql = "select * from admin where username = ? and password = ?";
 		try {
-			String sql = "select * from user where Username="+username;
-			ResultSet rs = conn.prepareStatement(sql).executeQuery();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
-				user = new UserModel(); 
-				user.setID(rs.getInt("ID"));
-				user.setName(rs.getString("Name"));
-				user.setUsername(rs.getString("Username"));
-				user.setPassword(rs.getString("Password"));
-				
+				Admin admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3));
+				return admin;
 			}
-			return user;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
+		return null;
 	}
+	public static boolean addUser(Admin admin) {
+		Connection conn = DBContext.getConnect(); // Vao cong ket noi
+		try {
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO admin(username,password) values(?,?)");
+			ps.setString(1, admin.getUsername());
+			ps.setString(2, admin.getPassword());
+			boolean success = ps.executeUpdate() >0;
+			return success;
+ 		} catch (Exception e) {
+			// TODO: handle exception
+ 			e.printStackTrace();
+ 			
+		}
+		return false;
+	}
+	
 }

@@ -31,8 +31,4 @@ public class ProductBO {
 	public static ProductModel getProductbyID(int id) {
 		return ProductDAO.getProductbyID(id);
 	}
-	
-	public static Admin getAdminByLogin(String username, String password) {
-		return ProductDAO.getAdminByLogin(username, password);
-	}
 }

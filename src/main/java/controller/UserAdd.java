@@ -1,23 +1,29 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.BO.UserBO;
+import model.Bean.Admin;
+
 /**
- * Servlet implementation class LoginServerlet
+ * Servlet implementation class UserAdd
  */
-@WebServlet("/LoginServerlet")
-public class LoginServerlet extends HttpServlet {
+@WebServlet("/UserAdd")
+public class UserAdd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServerlet() {
+    public UserAdd() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +41,21 @@ public class LoginServerlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String username = request.getParameter("user-name");
+		String password	= request.getParameter("user-password");
+		
+		Admin admin = new Admin();
+		admin.setUsername(username);
+		admin.setPassword(password);
+		if(UserBO.addUser(admin))
+		{
+			RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");
+			rd.forward(request, response);
+		}
+		else {
+			PrintWriter pr2 = response.getWriter();
+			pr2.print("Loi them vao");
+		}
 	}
 
 }

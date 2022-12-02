@@ -41,10 +41,10 @@
 		<form action="../ProductAdd" method="post" class="add-form" enctype="multipart/form-data">
 			<h1><span>Add flower form</span></h1>
  			<input type="file" name="product-img"  placeholder="Img" class="add-box">
-			<input type="text" name="product-name" placeholder="Name" class="add-box">
-			<input type="text" name="product-price" placeholder="Price" class="add-box">
-			<input type="text" name="product-discount" placeholder="Discount" class="add-box">
-			<input type="submit" class="add-btn" class="add-box" value="Add" />
+			<input type="text" name="product-name" placeholder="Name" class="add-box" required>
+			<input type="text" name="product-price" placeholder="Price" class="add-box" required>
+			<input type="text" name="product-discount" placeholder="Discount" class="add-box"required>
+			<button type="submit" class="add-btn" class="add-box">Add</button>
 		</form>
 	</div>
 </section>

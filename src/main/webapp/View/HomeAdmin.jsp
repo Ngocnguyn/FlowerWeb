@@ -1,4 +1,4 @@
-<%@page import="java.util.*"%>
+  <%@page import="java.util.*"%>
 <%@page import="model.Bean.ProductModel"%>
 <%@page import="model.Bean.Admin"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -35,6 +35,8 @@
     <div class="content">
         <h3>Welcome, <%=admin.getUsername()%></h3>
         <span> natural & beautiful flowers </span>
+        <h4>Do you want to add an account?</h4>
+        <a class="btn" href="View/user-add.jsp?username=<%=admin.getUsername()%>">Register</a>
     </div>
     
 </section>
@@ -43,7 +45,7 @@
 
 <section class="products" id="products">
 
-    <h1 class="heading"> latest <span>products</span>  </h1>
+    <h1 class="heading"> latest <span>products</span> </h1>
 	<a class ="btn" href="View/product-add.jsp?username=<%=admin.getUsername()%>">
 	    + New Item
     </a>

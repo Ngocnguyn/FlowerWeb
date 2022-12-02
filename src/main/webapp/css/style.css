@@ -47,6 +47,9 @@ section{
     cursor: pointer;
     font-size: 1.7rem;
 }
+.btn-register{
+	padding: .5rem 2rem;
+}
 
 .btn:hover{
     background:var(--pink);

@@ -56,7 +56,6 @@ span {
 }
 
 .login-btn, .edit-btn, .add-btn {
-	display: flex;
 	border-radius: 5rem;
 	background: #333;
 	color: #fff;
