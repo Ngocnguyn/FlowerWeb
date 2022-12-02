@@ -130,6 +130,10 @@
 <section class="products" id="products">
 
     <h1 class="heading"> latest <span>products</span>  </h1>
+    <form action="searchhome" method="post">
+		<input type="text" name="name-search" class="login-box" style="border:1px solid">
+		<button type="submit" class="search-btn">Search</button>
+	</form>
     <div class="box-container" style="margin-top:2rem;">
     <% ArrayList<ProductModel> products = (ArrayList<ProductModel>)request.getAttribute("products");%>
 		<%for(ProductModel item : products){

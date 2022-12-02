@@ -55,7 +55,7 @@ span {
     color: #e84393;
 }
 
-.login-btn, .edit-btn, .add-btn {
+.login-btn, .edit-btn, .add-btn .search-btns {
 	border-radius: 5rem;
 	background: #333;
 	color: #fff;

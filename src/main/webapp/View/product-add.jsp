@@ -44,7 +44,7 @@
 			<input type="text" name="product-name" placeholder="Name" class="add-box" required>
 			<input type="text" name="product-price" placeholder="Price" class="add-box" required>
 			<input type="text" name="product-discount" placeholder="Discount" class="add-box"required>
-			<button type="submit" class="add-btn" class="add-box">Add</button>
+			<button type="submit" class="add-btn add-box">Add</button>
 		</form>
 	</div>
 </section>

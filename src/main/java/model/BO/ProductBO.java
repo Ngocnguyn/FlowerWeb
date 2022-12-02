@@ -11,6 +11,9 @@ public class ProductBO {
 	public static ArrayList<ProductModel> getProducts() {
 		return ProductDAO.getProducts();
 	}
+	public static ArrayList<ProductModel> getProductsbyName(String name) {
+		return ProductDAO.getProductsbyName(name);
+	}
 	public static boolean addProduct(ProductModel product) {
 		
 		// TODO Auto-generated method stub

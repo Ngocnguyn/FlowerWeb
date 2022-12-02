@@ -40,6 +40,32 @@ public class ProductDAO {
 		}
 		return products;
 	}
+	public static ArrayList<ProductModel> getProductsbyName(String name) {
+		// mo cong ket noi csdl
+		Connection conn = DBContext.getConnect();
+		// Tao danh sach sp
+		ArrayList<ProductModel> products = new ArrayList<>();
+		
+		// duyet tung phan tu cua bang product trong csdl
+		try {
+			ResultSet rs = conn.prepareStatement("select * from product where Name like '%"+name+"%'").executeQuery();
+			while(rs.next()) {
+				ProductModel product = new ProductModel();
+				product.setId(rs.getInt("ID"));
+				product.setImg(rs.getBytes("Img"));
+				product.setName(rs.getString("Name"));
+				product.setPrice(rs.getInt("Price"));
+				product.setDiscount(rs.getInt("Discount"));
+				
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return products;
+	}
 	
 	public static boolean addProduct(ProductModel product) {
 		

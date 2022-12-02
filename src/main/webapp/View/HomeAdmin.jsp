@@ -45,10 +45,16 @@
 
 <section class="products" id="products">
 
-    <h1 class="heading"> latest <span>products</span> </h1>
+    <h1 class="heading"> latest <span>products</span></h1>
+    <div class="controller" style="display:flex;align-items=center;gap:100px">
 	<a class ="btn" href="View/product-add.jsp?username=<%=admin.getUsername()%>">
 	    + New Item
     </a>
+    <form action="search" method="post">
+		<input type="text" name="name-search" class="login-box" style="border:1px solid">
+		<button type="submit" class="search-btn">Search</button>
+	</form>
+    </div>
     <div class="box-container" style="margin-top:2rem;">
     <% ArrayList<ProductModel> products = (ArrayList<ProductModel>)request.getAttribute("products");%>
 		<%for(ProductModel item : products){
