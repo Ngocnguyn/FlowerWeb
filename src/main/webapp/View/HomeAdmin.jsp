@@ -59,7 +59,7 @@
              
                  <div class="icons">
                     <a href="#" class="fas fa-heart"></a>
-                    <a href="View/product-edit.jsp?id=<%=item.getId()%>&&username=<%=admin.getUsername() %>" class="cart-btn">Edit</a>
+                    <a href="ProductDetail?id=<%=item.getId()%>&&username=<%=admin.getUsername() %>" class="cart-btn">Edit</a>
                     <a href="ProductDelete?id=<%=item.getId()%>" class="fas fa-trash"></a>
                 </div>
             </div>

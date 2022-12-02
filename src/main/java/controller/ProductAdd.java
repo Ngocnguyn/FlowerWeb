@@ -56,7 +56,6 @@ public class ProductAdd extends HttpServlet {
 		
 		Part filePart=request.getPart("product-img");// Retrieves <input type="file" name="image">`
 		InputStream inputStream = filePart.getInputStream();
-		// add vao csdl
 		byte[] img =  new byte[inputStream.available()];
 		inputStream.read(img);
 		String name = request.getParameter("product-name");

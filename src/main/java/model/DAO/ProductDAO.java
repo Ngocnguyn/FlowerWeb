@@ -64,11 +64,12 @@ public class ProductDAO {
 	public static boolean editProduct(ProductModel product) {
 		Connection conn = DBContext.getConnect(); // Vao cong ket noi
 		try {
-			PreparedStatement ps = conn.prepareStatement("update product(Img, Name, Price, Discount) values(?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("update product set Img=?,Name=?,Price=?,Discount=? where ID=?");
 			ps.setBytes(1, product.getImg());
 			ps.setString(2, product.getName());
 			ps.setInt(3, product.getPrice());
 			ps.setInt(4, product.getDiscount());
+			ps.setInt(5, product.getId());
 			boolean success = ps.executeUpdate() >0;
 			return success;
  		} catch (Exception e) {
