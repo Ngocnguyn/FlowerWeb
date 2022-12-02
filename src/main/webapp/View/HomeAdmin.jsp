@@ -55,7 +55,7 @@
             <span class="discount">-<%=item.getDiscount()%>%</span>
             <div class="image">
                  <img src=<%="data:image/png;base64," + new String(Base64.getEncoder().encode(item.getImg()))%> alt=""
-						onerror="this.src='https://img.freepik.com/premium-vector/sunflower-character-with-crying-tears-emotion-sad-face-depressive-eyes-arms-legs-plant-person-with-melancholy-expression-yellow-sun-flower-emoticon-vector-flat-illustration_427567-4060.jpg?w=2000'">
+                 	onerror="this.src='https://img.freepik.com/premium-vector/sunflower-character-with-crying-tears-emotion-sad-face-depressive-eyes-arms-legs-plant-person-with-melancholy-expression-yellow-sun-flower-emoticon-vector-flat-illustration_427567-4060.jpg?w=2000'">
              
                  <div class="icons">
                     <a href="#" class="fas fa-heart"></a>
@@ -116,6 +116,7 @@
 
 </section>
 
-<!-- footer section ends -->    
+<!-- footer section ends -->
+  
 </body>
 </html>

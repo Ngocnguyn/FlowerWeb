@@ -78,6 +78,22 @@ public class ProductDAO {
  			return false;
 		}
 	}
+	public static boolean editProductnoImg(ProductModel product) {
+		Connection conn = DBContext.getConnect(); // Vao cong ket noi
+		try {
+			PreparedStatement ps = conn.prepareStatement("update product set Name=?,Price=?,Discount=? where ID=?");
+			ps.setString(1, product.getName());
+			ps.setInt(2, product.getPrice());
+			ps.setInt(3, product.getDiscount());
+			ps.setInt(4, product.getId());
+			boolean success = ps.executeUpdate() >0;
+			return success;
+ 		} catch (Exception e) {
+			// TODO: handle exception
+ 			e.printStackTrace();
+ 			return false;
+		}
+	}
 	public static boolean deleteProduct(ProductModel product) {
 		Connection conn = DBContext.getConnect(); // Vao cong ket noi
 		try {

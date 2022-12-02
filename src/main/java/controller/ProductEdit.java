@@ -54,38 +54,47 @@ public class ProductEdit extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		int id = Integer.parseInt(request.getParameter("product-id"));
-		Part filePart= request.getPart("product-img");
-		ProductModel product = new ProductModel();
-
-		//xu ly anh
-		if(filePart != null) {
-			InputStream inputStream = filePart.getInputStream();
-			byte[] img =  new byte[inputStream.available()];
-			inputStream.read(img);
-			product.setImg(img);
-		}
-		else {
-			ProductModel flw = ProductBO.getProductbyID(id);
-			product.setImg(flw.getImg());
-		}
 		
+		Part filePart= request.getPart("product-img");
+	    String fileName = filePart.getSubmittedFileName();
+		
+	    ProductModel product = new ProductModel();
 		String name = request.getParameter("product-name");
 		int price = Integer.parseInt(request.getParameter("product-price"));
 		int discount = Integer.parseInt(request.getParameter("product-discount"));
+		
 		product.setId(id);
 		product.setName(name);
 		product.setPrice(price);
 		product.setDiscount(discount);
-		
-		if(ProductBO.editProduct(product))
-		{	
-			RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");
-			rd.forward(request, response);
-		}
-		else {
-			PrintWriter pr2 = response.getWriter();
-			pr2.print("Loi sua");
-		}
+	    
+	    if(fileName.trim().equals("")) { //k upload
+	    	if(ProductBO.editProductnoImg(product))
+			{	
+				RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");
+				rd.forward(request, response);
+			}
+			else {
+				PrintWriter pr2 = response.getWriter();
+				pr2.print("Loi sua");
+			}
+	    } 
+	    else { //co upload
+	    	InputStream inputStream = filePart.getInputStream();
+	    	byte[] img =  new byte[inputStream.available()];
+	    	inputStream.read(img);
+	    	product.setImg(img);
+	    	
+	    	//goi ham edit (co anh)
+	    	if(ProductBO.editProduct(product))
+			{	
+				RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");
+				rd.forward(request, response);
+			}
+			else {
+				PrintWriter pr2 = response.getWriter();
+				pr2.print("Loi sua");
+			}
+	    }
 	}
-
 }

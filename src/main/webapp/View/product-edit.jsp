@@ -43,11 +43,12 @@
 		<form action="ProductEdit" method="post" class="edit-form" enctype="multipart/form-data">
 			<h1><span>Edit flower form</span></h1>
  			<input type="text" name="product-id" placeholder="Id" value="<%=product.getId()%>" class="edit-box" readonly >
- 			<input type="file" name="product-img" placeholder="Img" class="edit-box" >
+ 			<input type="file" name="product-img" placeholder="Img" class="edit-box">
 			<input type="text" name="product-name" placeholder="Name" value="<%=product.getName()%>" class="edit-box" >
 			<input type="text" name="product-price" placeholder="Price" value="<%=product.getPrice()%>" class="edit-box">
 			<input type="text" name="product-discount" placeholder="Discount" value="<%=product.getDiscount()%>" class="edit-box">
-			<button type="submit" class="edit-btn" class="edit-box">Save</button>
+			<button type="submit" class="edit-btn" class="edit-box" onclick="saveHandle()">Save</button>
+			
 		</form>
 	</div>
 </section>

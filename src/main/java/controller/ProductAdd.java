@@ -58,15 +58,18 @@ public class ProductAdd extends HttpServlet {
 		InputStream inputStream = filePart.getInputStream();
 		byte[] img =  new byte[inputStream.available()];
 		inputStream.read(img);
+		
 		String name = request.getParameter("product-name");
 		int price = Integer.parseInt(request.getParameter("product-price"));
 		int discount = Integer.parseInt(request.getParameter("product-discount"));
+		
 		ProductModel product = new ProductModel();
 		product.setImg(img);
 		product.setName(name);
 		product.setPrice(price);
 		product.setDiscount(discount);
-	if(ProductBO.addProduct(product))
+		
+		if(ProductBO.addProduct(product))
 		{
 			RequestDispatcher rd = request.getRequestDispatcher("/HomeAdmin");
 			rd.forward(request, response);

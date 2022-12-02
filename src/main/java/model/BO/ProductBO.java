@@ -20,6 +20,9 @@ public class ProductBO {
 	public static boolean editProduct(ProductModel product) {
 		return ProductDAO.editProduct(product);
 	}
+	public static boolean editProductnoImg(ProductModel product) {
+		return ProductDAO.editProductnoImg(product);
+	}
 	
 	public static boolean deleteProduct(ProductModel product) {
 		return ProductDAO.deleteProduct(product);
